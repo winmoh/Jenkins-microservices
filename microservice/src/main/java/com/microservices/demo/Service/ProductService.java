@@ -21,16 +21,16 @@ public class ProductService {
     }
 
     public String addProduct(ProductDto  product){
-        if(productRepository.findProductByProduct_code(product.getProduct_code()).isPresent()){
+        if(productRepository.findProductByCode(product.getCode()).isPresent()){
             return "product already saved";
         }
         else{
             Product prod=Product.builder()
-                    .product_code(product.getProduct_code())
+                    .code(product.getCode())
                     .price(product.getPrice())
                     .name(product.getName())
                     .available_quantity(product.getAvailable_quantity())
-                    .product_category(product.getProduct_category()).build();
+                    .category(product.getProduct_category()).build();
             productRepository.save(prod);
             return "product saved successfully";
         }
@@ -46,7 +46,7 @@ public class ProductService {
         }
     }
     public List<Product> getProductsByCategory(Category cat){
-        return productRepository.findProductByProduct_category(cat);
+        return productRepository.findProductByCategory(cat);
     }
 
     public String deleteProductById(long id){
