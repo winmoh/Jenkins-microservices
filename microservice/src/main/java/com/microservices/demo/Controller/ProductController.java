@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +21,7 @@ import java.util.Optional;
 public class ProductController {
 
     private final ProductService productService;
+    private final WebClient.Builder webClientBuilder;
     @GetMapping("/getAllProducts")
     public List<Product> getAllProducts(){
         return productService.getAllProduct();
@@ -46,6 +49,14 @@ public class ProductController {
 
     }
 
+    @GetMapping("/order")
+    public Mono<String> makeOrder(){
+        Mono<String> result= webClientBuilder.build().get()
+                    .uri("http://order-service/api/order").retrieve().bodyToMono(String.class);
+
+
+        return result;
+    }
 
 
 
