@@ -1,0 +1,10 @@
+com\microservices\demo\MicroserviceApplication.class
+com\microservices\demo\Dto\ProductDto.class
+com\microservices\demo\Model\Product.class
+com\microservices\demo\Model\Category.class
+com\microservices\demo\Controller\ProductController.class
+com\microservices\demo\Service\ProductService.class
+com\microservices\demo\config\webClientConfig.class
+com\microservices\demo\Dto\ProductDto$ProductDtoBuilder.class
+com\microservices\demo\Model\Product$ProductBuilder.class
+com\microservices\demo\Repository\ProductRepository.class
