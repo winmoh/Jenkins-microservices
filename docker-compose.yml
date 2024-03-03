@@ -7,16 +7,10 @@ services:
       - "9191:9191"
     depends_on:
       - discovery-service
-      - product-service
-      - order-service
   discovery-service:
     image: discovery-service
     ports:
       - "8761:8761"
-    depends_on:
-      - gateway-service
-      - product-service
-      - discovery-service
   product-service:
     image: product-service
     ports:
@@ -25,7 +19,7 @@ services:
       - gateway-service
       - discovery-service
       - postgres-db
-  postgres-db:
+  mysql-db:
     image: mysql:latest
     ports:
       - "3306:3306"

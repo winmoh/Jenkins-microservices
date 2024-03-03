@@ -1,6 +1,6 @@
 #!/bin/bash
-docker build discovery-service:latest ./discovery-service
-docker build gateway-service:latest ./api-gateway
-docker build order-service:latest ./order-service
-docker build product-service:latest ./microservice
+docker build -t discovery-service:latest ./discovery-service
+docker build -t gateway-service:latest ./api-gateway
+docker build -t order-service:latest ./order-microservice
+docker build -t product-service:latest ./microservice
 
