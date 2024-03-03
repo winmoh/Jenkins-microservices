@@ -5,8 +5,8 @@ RUN java -Djarmode=layertools -jar app.jar extract
 
 FROM openjdk:17
 WORKDIR order-service
-COPY --from=builder inventory/dependencies/ ./
-COPY --from=builder inventory/spring-boot-loader/ ./
-COPY --from=builder inventory/snapshot-dependencies/ ./
-COPY --from=builder inventory/application/ ./
+COPY --from=builder orderService/dependencies/ ./
+COPY --from=builder orderService/spring-boot-loader/ ./
+COPY --from=builder orderService/snapshot-dependencies/ ./
+COPY --from=builder orderService/application/ ./
 ENTRYPOINT ["java","org.springframework.boot.loader.JarLauncher"]
