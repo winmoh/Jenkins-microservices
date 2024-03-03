@@ -5,8 +5,8 @@ RUN java -Djarmode=layertools -jar app.jar extract
 
 FROM openjdk:17
 WORKDIR gateway-service
-COPY --from=builder inventory/dependencies/ ./
-COPY --from=builder inventory/spring-boot-loader/ ./
-COPY --from=builder inventory/snapshot-dependencies/ ./
-COPY --from=builder inventory/application/ ./
+COPY --from=builder gateway/dependencies/ ./
+COPY --from=builder gateway/spring-boot-loader/ ./
+COPY --from=builder gateway/snapshot-dependencies/ ./
+COPY --from=builder gateway/application/ ./
 ENTRYPOINT ["java","org.springframework.boot.loader.JarLauncher"]
