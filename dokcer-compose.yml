@@ -1,41 +1,46 @@
 version: '3.8'
 
 services:
+  discovery-service:
+    image: discovery-service
+    ports:
+      - "8761:8761"
+
   gateway-service:
     image: gateway-service
     ports:
       - "9191:9191"
     depends_on:
       - discovery-service
-      - product-service
-      - order-service
-  discovery-service:
-    image: discovery-service
+
+
+  mysql-db:
+    image: mysql:latest
     ports:
-      - "8761:8761"
-    depends_on:
-      - gateway-service
-      - product-service
-      - discovery-service
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=service-db
+      - MYSQL_ROOT_PASSWORD=Mysql2023@
+      - SPRING_PROFILES_ACTIVE=docker
+
   product-service:
     image: product-service
     ports:
       - "9090:9090"
     depends_on:
-      - gateway-service
       - discovery-service
-      - postgres-db
-  postgres-db:
-    image: mysql:latest
-    ports:
-      - "3306:3306"
+      - mysql-db
     environment:
-      - MYSQL_ROOT_PASSWORD= Mysql2023@
-      - MYSQL_DATABASE= service-db
+      - SPRING_PROFILES_ACTIVE=docker
+      - spring.datasource.url=jdbc:mysql://mysql-db:3306/service-db
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=Mysql2023@
   order-service:
     image: order-service:latest
     ports:
       - "9292:9292"
     depends_on:
-      - gateway-service
       - discovery-service
+      - gateway-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker

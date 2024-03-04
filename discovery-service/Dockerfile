@@ -9,4 +9,4 @@ COPY --from=builder discovery/dependencies/ ./
 COPY --from=builder discovery/spring-boot-loader/ ./
 COPY --from=builder discovery/snapshot-dependencies/ ./
 COPY --from=builder discovery/application/ ./
-ENTRYPOINT ["java","org.springframework.boot.loader.JarLauncher"]
+ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]
