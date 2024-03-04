@@ -2,23 +2,15 @@ version: '3.8'
 
 services:
   gateway-service:
-    image: gateway-service
+    image: maouinti/gateway-service:latest
     ports:
       - "9191:9191"
     depends_on:
       - discovery-service
   discovery-service:
-    image: discovery-service
+    image: maouinti/discovery-service:latest
     ports:
       - "8761:8761"
-  product-service:
-    image: product-service
-    ports:
-      - "9090:9090"
-    depends_on:
-      - gateway-service
-      - discovery-service
-      - mysql-db
   mysql-db:
     image: mysql:latest
     ports:
@@ -26,8 +18,17 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD= Mysql2023@
       - MYSQL_DATABASE= service-db
+  product-service:
+    image: maouinti/product-service:latest
+    ports:
+      - "9090:9090"
+    depends_on:
+      - gateway-service
+      - discovery-service
+      - mysql-db
+
   order-service:
-    image: order-service:latest
+    image: maouinti/order-service:latest
     ports:
       - "9292:9292"
     depends_on:
